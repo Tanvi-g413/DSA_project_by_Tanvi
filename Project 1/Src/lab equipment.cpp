@@ -2,6 +2,7 @@
 #include <string>
 #include <stack>
 #include <queue>
+#include <sstream>
 using namespace std;
 
 struct Node {
@@ -17,6 +18,13 @@ Node* head = NULL;
 
 stack<string> actionHistory;
 queue<int> returnQueue;
+
+// Convert integer to string for older compilers
+string numberToString(int number) {
+    stringstream ss;
+    ss << number;
+    return ss.str();
+}
 
 // Search for equipment
 Node* findEquipment(int id) {
@@ -35,7 +43,7 @@ Node* findEquipment(int id) {
     return NULL;
 }
 
-// Add equipment to circular doubly linked list
+// Add equipment
 void addEquipment() {
     Node* newNode = new Node;
 
@@ -70,7 +78,8 @@ void addEquipment() {
     }
 
     actionHistory.push(
-        "Added equipment " + to_string(newNode->equipmentID)
+        "Added equipment " +
+        numberToString(newNode->equipmentID)
     );
 
     cout << "Equipment added successfully!\n";
@@ -108,6 +117,7 @@ void searchEquipment() {
 
     if (temp != NULL) {
         cout << "Equipment found!\n";
+        cout << "Equipment ID: " << temp->equipmentID << "\n";
         cout << "Student ID: " << temp->studentID << "\n";
         cout << "Issue Time: " << temp->issueTime << "\n";
         cout << "Status: " << temp->status << "\n";
@@ -162,7 +172,7 @@ void processReturnRequest() {
     temp->status = "Returned";
 
     actionHistory.push(
-        "Returned equipment " + to_string(id)
+        "Returned equipment " + numberToString(id)
     );
 
     cout << "Equipment " << id
@@ -194,7 +204,7 @@ void deleteEquipment() {
     }
 
     actionHistory.push(
-        "Deleted equipment " + to_string(id)
+        "Deleted equipment " + numberToString(id)
     );
 
     delete temp;
@@ -231,7 +241,8 @@ void displayReturnQueue() {
     cout << "\n--- Return Queue (FIFO) ---\n";
 
     while (!temp.empty()) {
-        cout << "Equipment ID: " << temp.front() << "\n";
+        cout << "Equipment ID: "
+             << temp.front() << "\n";
         temp.pop();
     }
 }
@@ -267,6 +278,7 @@ int main() {
         cout << "7. Display Action History (Stack)\n";
         cout << "8. Display Return Queue\n";
         cout << "9. Exit\n";
+
         cout << "Enter your choice: ";
         cin >> choice;
 
