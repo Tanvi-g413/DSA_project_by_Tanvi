@@ -9,49 +9,73 @@ flowchart TD
 
     E -->|1| F[Enter Equipment Details]
     F --> G[Create New Node]
-    G --> H[Check Duplicate Equipment ID]
-    H --> I[Insert Node into Circular Doubly Linked List]
-    I --> J[Push Action into Stack]
-    J --> C
+    G --> H{Duplicate ID?}
+    H -->|Yes| I[Display ID Already Exists]
+    I --> C
+    H -->|No| J[Insert Node into Circular Doubly Linked List]
+    J --> K[Push Add Action into Stack]
+    K --> C
 
-    E -->|2| K[Traverse Linked List]
-    K --> L[Display All Equipment Records]
-    L --> C
+    E -->|2| L{List Empty?}
+    L -->|Yes| M[Display No Records Found]
+    L -->|No| N[Traverse List and Display Records]
+    M --> C
+    N --> C
 
-    E -->|3| M[Enter Equipment ID]
-    M --> N[Search Equipment]
-    N --> O[Display Search Result]
-    O --> C
-
-    E -->|4| P[Enter Equipment ID for Return]
-    P --> Q[Check Equipment Status]
-    Q --> R[Add Return Request to Queue]
+    E -->|3| O[Enter Equipment ID]
+    O --> P[Search Circular Doubly Linked List]
+    P --> Q{Equipment Found?}
+    Q -->|Yes| R[Display Equipment Details]
+    Q -->|No| S[Display Equipment Not Found]
     R --> C
+    S --> C
 
-    E -->|5| S[Get First Return Request]
-    S --> T[Remove Request from Queue]
+    E -->|4| T[Enter Equipment ID for Return]
     T --> U[Search Equipment]
-    U --> V[Update Status to Returned]
-    V --> W[Push Action into Stack]
+    U --> V{Found and Not Returned?}
+    V -->|Yes| W[Add ID to Return Queue]
+    V -->|No| X[Display Error Message]
     W --> C
+    X --> C
 
-    E -->|6| X[Enter Equipment ID to Delete]
-    X --> Y[Search Equipment]
-    Y --> Z[Update Previous and Next Links]
-    Z --> AA[Delete Node and Push Action into Stack]
-    AA --> C
+    E -->|5| Y{Queue Empty?}
+    Y -->|Yes| Z[Display No Pending Requests]
+    Y -->|No| AA[Remove First Request from Queue]
+    AA --> AB[Search Equipment]
+    AB --> AC{Equipment Available?}
+    AC -->|No| AD[Cancel or Skip Request]
+    AC -->|Yes| AE[Update Status to Returned]
+    AE --> AF[Push Return Action into Stack]
+    AD --> C
+    AF --> C
+    Z --> C
 
-    E -->|7| AB[Copy Stack]
-    AB --> AC[Display Action History]
-    AC --> C
+    E -->|6| AG[Enter Equipment ID to Delete]
+    AG --> AH[Search Equipment]
+    AH --> AI{Equipment Found?}
+    AI -->|No| AJ[Display Equipment Not Found]
+    AI -->|Yes| AK[Update Next and Previous Links]
+    AK --> AL[Delete Node and Push Action into Stack]
+    AJ --> C
+    AL --> C
 
-    E -->|8| AD[Copy Queue]
-    AD --> AE[Display Pending Return Requests]
-    AE --> C
+    E -->|7| AM[Copy Stack]
+    AM --> AN{Stack Empty?}
+    AN -->|Yes| AO[Display No Action History]
+    AN -->|No| AP[Display Actions Latest First]
+    AO --> C
+    AP --> C
 
-    E -->|9| AF[Free Linked List Memory]
-    AF --> AG([STOP])
+    E -->|8| AQ[Copy Queue]
+    AQ --> AR{Queue Empty?}
+    AR -->|Yes| AS[Display Queue Empty]
+    AR -->|No| AT[Display Pending Return Requests]
+    AS --> C
+    AT --> C
 
-    E -->|Invalid| AH[Display Invalid Choice]
-    AH --> C
+    E -->|9| AU[Free Linked List Memory]
+    AU --> AV([STOP])
+
+    E -->|Invalid| AW[Display Invalid Choice]
+    AW --> C
 ```
