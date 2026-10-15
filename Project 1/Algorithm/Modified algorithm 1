@@ -1,149 +1,72 @@
-### Algorithm – Lab Equipment Return Tracker Using Doubly Linked List, Stack, and Queue
+Algorithm – Lab Equipment Return Tracker Using Doubly Linked List, Stack, and Queue
 
-### Step 1
+Step 1
 
 Start the program.
 
-### Step 2
+Step 2
 
-Initialize the doubly linked list with `head = nullptr` and `tail = nullptr`. Initialize an empty Stack and Queue.
+Initialize the doubly linked list with "head = nullptr" and "tail = nullptr". Initialize an empty stack for activity history and an empty queue for return requests.
 
-### Step 3
+Step 3
 
-Display the following menu:
+Display the main menu:
 
-* Add Equipment
+1. Add Equipment
+2. Display Equipment Forward
+3. Display Equipment Backward
+4. Search Equipment
+5. Delete Equipment
+6. Add Return Request
+7. Process Return Request
+8. Display Return Requests
+9. Display Activity History
+10. Exit
 
-* Display Equipment Forward
+Step 4
 
-* Display Equipment Backward
+Read the user's choice.
 
-* Search Equipment
+Step 5: Add Equipment
 
-* Delete Equipment
+Accept the equipment ID, name, and quantity. Check that the quantity is positive. Create a new node and insert it at the end of the doubly linked list. Record the activity in the stack.
 
-* Add Return Request
+Step 6: Display Equipment Forward
 
-* Process Return Request
+Start from "head" and follow the "next" pointers until "nullptr" is reached. Display each equipment record.
 
-* Display Return Requests
+Step 7: Display Equipment Backward
 
-* Display Activity History
+Start from "tail" and follow the "prev" pointers until "nullptr" is reached. Display each equipment record.
 
-* Exit
+Step 8: Search Equipment
 
-### Step 4 – Add Equipment
+Accept an equipment ID. Traverse the list from "head" and display the record if the ID is found. Otherwise, display “Equipment not found.”
 
-* Create a new node.
+Step 9: Delete Equipment
 
-* Enter Equipment ID, Equipment Name, and Quantity.
+Search for the equipment ID. Update the previous and next pointers to remove the matching node. Update "head" or "tail" when necessary, delete the node, and record the activity in the stack.
 
-* Set the `prev` and `next` pointers to `nullptr`.
+Step 10: Add Return Request
 
-* If the list is empty, set both `head` and `tail` to the new node.
+Accept an equipment ID and insert it into the return queue.
 
-* Otherwise, insert the new node at the end of the list.
+Step 11: Process Return Request
 
-* Update the `prev` and `next` pointers.
+If the queue is not empty, remove and process the oldest return request. Record the activity in the stack.
 
-* Push the add action into the Stack.
+Step 12: Display Return Requests
 
-### Step 5 – Display Equipment Forward
+Display all pending return requests without removing them from the queue.
 
-* Check whether the doubly linked list is empty.
+Step 13: Display Activity History
 
-* If empty, display No equipment records available.
+Display the recorded activities from the stack, starting with the most recent activity.
 
-* Otherwise, start traversal from `head`.
+Step 14: Repeat or Exit
 
-* Display each equipment record by moving through the `next` pointers.
+If the user does not select Exit, return to the main menu. Otherwise, terminate the program and release the dynamically allocated memory.
 
-* Stop when the pointer becomes `nullptr`.
+Conclusion
 
-### Step 6 – Display Equipment Backward
-
-* Check whether the doubly linked list is empty.
-
-* If empty, display No equipment records available.
-
-* Otherwise, start traversal from `tail`.
-
-* Display each equipment record by moving through the `prev` pointers.
-
-* Stop when the pointer becomes `nullptr`.
-
-### Step 7 – Search Equipment
-
-* Enter the Equipment ID.
-
-* Traverse the list starting from `head`.
-
-* Compare each node's ID with the entered ID.
-
-* If the ID matches, display the equipment details.
-
-* Otherwise, display Equipment not found.
-
-### Step 8 – Delete Equipment
-
-* Enter the Equipment ID.
-
-* Search for the corresponding node.
-
-* Update the `prev` and `next` pointers to remove the node.
-
-* Update `head` or `tail` if the first or last node is deleted.
-
-* Release the memory allocated to the deleted node.
-
-* Push the delete action into the Stack.
-
-### Step 9 – Add Return Request
-
-* Enter the Equipment ID.
-
-* Insert the ID into the Queue.
-
-* Display Return request added to queue.
-
-### Step 10 – Process Return Request
-
-* Check whether the Queue is empty.
-
-* If empty, display No pending return requests.
-
-* Otherwise, remove the oldest request from the Queue.
-
-* Push the processed request action into the Stack.
-
-* Display the processed equipment ID.
-
-### Step 11 – Display Return Requests
-
-* Check whether the Queue is empty.
-
-* If empty, display No pending return requests.
-
-* Otherwise, copy the Queue and display all pending return requests in FIFO order.
-
-### Step 12 – Display Activity History
-
-* Check whether the Stack is empty.
-
-* If empty, display No activity history available.
-
-* Otherwise, copy the Stack and display recent activities in LIFO order.
-
-### Step 13
-
-Repeat the menu operations until the user selects Exit.
-
-### Step 14
-
-Release the memory allocated to all nodes in the doubly linked list.
-
-### Step 15
-
-Stop the program.
-
-Note: In the current C++ program, return requests are processed from the Queue, but equipment quantities and return statuses are not updated automatically.
+The Lab Equipment Return Tracker uses a doubly linked list to manage equipment, a stack to maintain activity history, and a queue to process return requests in FIFO order.
