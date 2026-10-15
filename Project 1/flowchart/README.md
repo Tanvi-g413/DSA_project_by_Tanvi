@@ -1,6 +1,3 @@
-# Flowchart – Lab Equipment Return Tracker
-
-```mermaid
 flowchart TD
     A([START]) --> B[Initialize Head = NULL, Stack and Queue]
     B --> C[Display Menu]
@@ -12,18 +9,18 @@ flowchart TD
     G --> H{Duplicate ID?}
     H -->|Yes| I[Display ID Already Exists]
     I --> C
-    H -->|No| J[Insert Node into Circular Doubly Linked List]
+    H -->|No| J[Insert Node into Singly Linked List]
     J --> K[Push Add Action into Stack]
     K --> C
 
     E -->|2| L{List Empty?}
     L -->|Yes| M[Display No Records Found]
-    L -->|No| N[Traverse List and Display Records]
+    L -->|No| N[Traverse Using Next Pointer and Display Records]
     M --> C
     N --> C
 
     E -->|3| O[Enter Equipment ID]
-    O --> P[Search Circular Doubly Linked List]
+    O --> P[Search Singly Linked List]
     P --> Q{Equipment Found?}
     Q -->|Yes| R[Display Equipment Details]
     Q -->|No| S[Display Equipment Not Found]
@@ -51,10 +48,10 @@ flowchart TD
     Z --> C
 
     E -->|6| AG[Enter Equipment ID to Delete]
-    AG --> AH[Search Equipment]
+    AG --> AH[Search Node and Track Previous Node]
     AH --> AI{Equipment Found?}
     AI -->|No| AJ[Display Equipment Not Found]
-    AI -->|Yes| AK[Update Next and Previous Links]
+    AI -->|Yes| AK[Update Previous Next Pointer or Head]
     AK --> AL[Delete Node and Push Action into Stack]
     AJ --> C
     AL --> C
@@ -73,9 +70,8 @@ flowchart TD
     AS --> C
     AT --> C
 
-    E -->|9| AU[Free Linked List Memory]
+    E -->|9| AU[Free Singly Linked List Memory]
     AU --> AV([STOP])
 
     E -->|Invalid| AW[Display Invalid Choice]
     AW --> C
-```
