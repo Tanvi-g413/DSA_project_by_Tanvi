@@ -1,1 +1,290 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include <queue>
+#include <sstream>
+using namespace std;
 
+struct Equipment {
+    int id;
+    string name;
+    int quantity;
+    Equipment* next;
+};
+
+class LabEquipmentTracker {
+private:
+    Equipment* last;
+    stack<string> history;
+    queue<int> returnQueue;
+
+public:
+    LabEquipmentTracker() {
+        last = NULL;
+    }
+
+    // Add equipment to Circular Linked List
+    void addEquipment(int id, string name, int quantity) {
+        Equipment* newNode = new Equipment;
+
+        newNode->id = id;
+        newNode->name = name;
+        newNode->quantity = quantity;
+
+        if (last == NULL) {
+            last = newNode;
+            newNode->next = newNode;
+        } else {
+            newNode->next = last->next;
+            last->next = newNode;
+            last = newNode;
+        }
+
+        history.push("Added equipment: " + name);
+        cout << "Equipment added successfully!\n";
+    }
+
+    // Display all equipment
+    void displayEquipment() {
+        if (last == NULL) {
+            cout << "No equipment records available.\n";
+            return;
+        }
+
+        Equipment* temp = last->next;
+        cout << "\n--- Equipment Records ---\n";
+
+        do {
+            cout << "ID: " << temp->id
+                 << " | Name: " << temp->name
+                 << " | Quantity: " << temp->quantity << endl;
+
+            temp = temp->next;
+        } while (temp != last->next);
+    }
+
+    // Search equipment by ID
+    void searchEquipment(int id) {
+        if (last == NULL) {
+            cout << "No equipment records available.\n";
+            return;
+        }
+
+        Equipment* temp = last->next;
+
+        do {
+            if (temp->id == id) {
+                cout << "Equipment found!\n";
+                cout << "ID: " << temp->id
+                     << " | Name: " << temp->name
+                     << " | Quantity: " << temp->quantity << endl;
+                return;
+            }
+
+            temp = temp->next;
+        } while (temp != last->next);
+
+        cout << "Equipment not found.\n";
+    }
+
+    // Delete equipment by ID
+    void deleteEquipment(int id) {
+        if (last == NULL) {
+            cout << "No equipment records available.\n";
+            return;
+        }
+
+        Equipment* current = last->next;
+        Equipment* previous = last;
+
+        do {
+            if (current->id == id) {
+                string deletedName = current->name;
+
+                if (current == last && current->next == last) {
+                    last = NULL;
+                } else {
+                    previous->next = current->next;
+
+                    if (current == last) {
+                        last = previous;
+                    }
+                }
+
+                delete current;
+                history.push("Deleted equipment: " + deletedName);
+
+                cout << "Equipment deleted successfully!\n";
+                return;
+            }
+
+            previous = current;
+            current = current->next;
+
+        } while (current != last->next);
+
+        cout << "Equipment not found.\n";
+    }
+
+    // Add return request to Queue
+    void addReturnRequest(int id) {
+        returnQueue.push(id);
+        cout << "Return request added to queue.\n";
+    }
+
+    // Process the oldest return request
+    void processReturnRequest() {
+        if (returnQueue.empty()) {
+            cout << "No pending return requests.\n";
+            return;
+        }
+
+        int id = returnQueue.front();
+        returnQueue.pop();
+
+        stringstream ss;
+        ss << "Processed return request for equipment ID: " << id;
+        history.push(ss.str());
+
+        cout << "Processed return request for equipment ID: "
+             << id << endl;
+    }
+
+    // Display pending return requests
+    void displayReturnRequests() {
+        if (returnQueue.empty()) {
+            cout << "No pending return requests.\n";
+            return;
+        }
+
+        queue<int> temp = returnQueue;
+
+        cout << "\n--- Pending Return Requests ---\n";
+
+        while (!temp.empty()) {
+            cout << "Equipment ID: " << temp.front() << endl;
+            temp.pop();
+        }
+    }
+
+    // Display activity history
+    void displayHistory() {
+        if (history.empty()) {
+            cout << "No activity history available.\n";
+            return;
+        }
+
+        stack<string> temp = history;
+
+        cout << "\n--- Recent Activity History ---\n";
+
+        while (!temp.empty()) {
+            cout << temp.top() << endl;
+            temp.pop();
+        }
+    }
+
+    // Menu
+    void menu() {
+        int choice, id, quantity;
+        string name;
+
+        do {
+            cout << "\n===== LAB EQUIPMENT RETURN TRACKER =====\n";
+            cout << "1. Add Equipment\n";
+            cout << "2. Display Equipment\n";
+            cout << "3. Search Equipment\n";
+            cout << "4. Delete Equipment\n";
+            cout << "5. Add Return Request\n";
+            cout << "6. Process Return Request\n";
+            cout << "7. Display Return Requests\n";
+            cout << "8. Display Activity History\n";
+            cout << "9. Exit\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    cout << "Enter equipment ID: ";
+                    cin >> id;
+
+                    cout << "Enter equipment name: ";
+                    getline(cin >> ws, name);
+
+                    cout << "Enter quantity: ";
+                    cin >> quantity;
+
+                    if (quantity <= 0) {
+                        cout << "Quantity must be positive.\n";
+                        break;
+                    }
+
+                    addEquipment(id, name, quantity);
+                    break;
+
+                case 2:
+                    displayEquipment();
+                    break;
+
+                case 3:
+                    cout << "Enter equipment ID to search: ";
+                    cin >> id;
+                    searchEquipment(id);
+                    break;
+
+                case 4:
+                    cout << "Enter equipment ID to delete: ";
+                    cin >> id;
+                    deleteEquipment(id);
+                    break;
+
+                case 5:
+                    cout << "Enter equipment ID for return request: ";
+                    cin >> id;
+                    addReturnRequest(id);
+                    break;
+
+                case 6:
+                    processReturnRequest();
+                    break;
+
+                case 7:
+                    displayReturnRequests();
+                    break;
+
+                case 8:
+                    displayHistory();
+                    break;
+
+                case 9:
+                    cout << "Exiting program. Thank you!\n";
+                    break;
+
+                default:
+                    cout << "Invalid choice. Please try again.\n";
+            }
+
+        } while (choice != 9);
+    }
+
+    // Free dynamically allocated nodes
+    ~LabEquipmentTracker() {
+        if (last != NULL) {
+            Equipment* head = last->next;
+            last->next = NULL;
+
+            while (head != NULL) {
+                Equipment* temp = head;
+                head = head->next;
+                delete temp;
+            }
+        }
+    }
+};
+
+int main() {
+    LabEquipmentTracker tracker;
+    tracker.menu();
+
+    return 0;
+}
