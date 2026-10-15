@@ -1,182 +1,90 @@
 ===== LAB EQUIPMENT RETURN TRACKER =====
-
 1. Add Equipment
 2. Display Equipment
 3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
+4. Update Return Status
+5. Delete Equipment
+6. Exit
 
 Enter your choice: 1
+
 Enter Equipment ID: 101
-Enter Student ID: 201
-Enter Issue Time: 10am
-Equipment added successfully!
+Enter Student ID: 205
+Enter Issue Time: 10AM
 
-===== LAB EQUIPMENT RETURN TRACKER =====
+Equipment record added successfully.
 
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
 
+### 2. Add Another Equipment
+
+text
 Enter your choice: 1
+
 Enter Equipment ID: 102
-Enter Student ID: 202
-Enter Issue Time: 11am
-Equipment added successfully!
+Enter Student ID: 218
+Enter Issue Time: 11AM
 
-===== LAB EQUIPMENT RETURN TRACKER =====
+Equipment record added successfully.
 
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
 
+### 3. Display Equipment
+
+text
 Enter your choice: 2
 
 --- Equipment Records ---
-Equipment ID: 101
-Student ID: 201
-Issue Time: 10am
-Status: Issued
 
-Equipment ID: 102
-Student ID: 202
-Issue Time: 11am
-Status: Issued
+Equipment ID : 101
+Student ID   : 205
+Issue Time   : 10AM
+Status       : Issued
+-------------------------
 
-===== LAB EQUIPMENT RETURN TRACKER =====
+Equipment ID : 102
+Student ID   : 218
+Issue Time   : 11AM
+Status       : Issued
+-------------------------
 
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
 
-Enter your choice: 3
-Enter Equipment ID to search: 101
-Equipment found!
-Equipment ID: 101
-Student ID: 201
-Issue Time: 10am
-Status: Issued
+### 4. Update Return Status
 
-===== LAB EQUIPMENT RETURN TRACKER =====
-
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
-
+text
 Enter your choice: 4
-Enter Equipment ID for return: 101
-Return request added to queue.
 
-===== LAB EQUIPMENT RETURN TRACKER =====
+Enter Equipment ID: 101
 
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
+Equipment status updated to Returned.
 
+
+### 5. Search Equipment
+
+text
+Enter your choice: 3
+
+Enter Equipment ID to search: 101
+
+Equipment Found!
+
+Equipment ID : 101
+Student ID   : 205
+Issue Time   : 10AM
+Status       : Returned
+
+
+### 6. Delete Equipment
+
+text
 Enter your choice: 5
-Equipment 101 returned successfully.
 
-===== LAB EQUIPMENT RETURN TRACKER =====
+Enter Equipment ID to delete: 101
 
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
+Equipment record deleted successfully.
 
+
+### 7. Exit
+
+text
 Enter your choice: 6
-Enter Equipment ID to delete: 102
-Equipment deleted successfully.
 
-===== LAB EQUIPMENT RETURN TRACKER =====
-
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
-
-Enter your choice: 7
-
---- Action History (Latest First) ---
-Deleted equipment 102
-Returned equipment 101
-Added equipment 102
-Added equipment 101
-
-===== LAB EQUIPMENT RETURN TRACKER =====
-
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
-
-Enter your choice: 8
-Return queue is empty.
-
-===== LAB EQUIPMENT RETURN TRACKER =====
-
-1. Add Equipment
-2. Display Equipment
-3. Search Equipment
-4. Add Return Request
-5. Process Return Request
-6. Delete Equipment
-7. Display Action History (Stack)
-8. Display Return Queue
-9. Exit
-
-Enter your choice: 9
-Exiting program. Thank you!
-
----
-
-Process exited after 77.34 seconds with return value 0
-Press any key to continue . . .
+Program terminated successfully.
