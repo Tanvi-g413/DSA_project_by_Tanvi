@@ -2,6 +2,7 @@
 #include <string>
 #include <stack>
 #include <queue>
+#include <sstream>
 using namespace std;
 
 struct Equipment {
@@ -13,6 +14,7 @@ struct Equipment {
 };
 
 class LabEquipmentTracker {
+private:
     Equipment* head;
     Equipment* tail;
     stack<string> history;
@@ -20,19 +22,24 @@ class LabEquipmentTracker {
 
 public:
     LabEquipmentTracker() {
-        head = NULL;
-        tail = NULL;
+        head = nullptr;
+        tail = nullptr;
     }
 
     void addEquipment(int id, string name, int quantity) {
+        if (quantity <= 0) {
+            cout << "Quantity must be positive.\n";
+            return;
+        }
+
         Equipment* newNode = new Equipment;
         newNode->id = id;
         newNode->name = name;
         newNode->quantity = quantity;
-        newNode->prev = NULL;
-        newNode->next = NULL;
+        newNode->prev = nullptr;
+        newNode->next = nullptr;
 
-        if (head == NULL) {
+        if (head == nullptr) {
             head = tail = newNode;
         } else {
             tail->next = newNode;
@@ -45,16 +52,15 @@ public:
     }
 
     void displayForward() {
-        Equipment* temp = head;
-
-        if (temp == NULL) {
+        if (head == nullptr) {
             cout << "No equipment records available.\n";
             return;
         }
 
+        Equipment* temp = head;
         cout << "\n--- Equipment Records (Forward) ---\n";
 
-        while (temp != NULL) {
+        while (temp != nullptr) {
             cout << "ID: " << temp->id
                  << " | Name: " << temp->name
                  << " | Quantity: " << temp->quantity << endl;
@@ -63,16 +69,15 @@ public:
     }
 
     void displayBackward() {
-        Equipment* temp = tail;
-
-        if (temp == NULL) {
+        if (tail == nullptr) {
             cout << "No equipment records available.\n";
             return;
         }
 
+        Equipment* temp = tail;
         cout << "\n--- Equipment Records (Backward) ---\n";
 
-        while (temp != NULL) {
+        while (temp != nullptr) {
             cout << "ID: " << temp->id
                  << " | Name: " << temp->name
                  << " | Quantity: " << temp->quantity << endl;
@@ -83,7 +88,7 @@ public:
     void searchEquipment(int id) {
         Equipment* temp = head;
 
-        while (temp != NULL) {
+        while (temp != nullptr) {
             if (temp->id == id) {
                 cout << "Equipment found!\n";
                 cout << "ID: " << temp->id
@@ -100,29 +105,27 @@ public:
     void deleteEquipment(int id) {
         Equipment* temp = head;
 
-        while (temp != NULL && temp->id != id) {
+        while (temp != nullptr && temp->id != id)
             temp = temp->next;
-        }
 
-        if (temp == NULL) {
+        if (temp == nullptr) {
             cout << "Equipment not found.\n";
             return;
         }
 
         string name = temp->name;
 
-        if (temp->prev != NULL)
+        if (temp->prev != nullptr)
             temp->prev->next = temp->next;
         else
             head = temp->next;
 
-        if (temp->next != NULL)
+        if (temp->next != nullptr)
             temp->next->prev = temp->prev;
         else
             tail = temp->prev;
 
         delete temp;
-
         history.push("Deleted equipment: " + name);
         cout << "Equipment deleted successfully!\n";
     }
@@ -141,10 +144,9 @@ public:
         int id = returnQueue.front();
         returnQueue.pop();
 
-        // Build the history message without to_string()
-        char buffer[100];
-        sprintf(buffer, "Processed return request for equipment ID: %d", id);
-        history.push(buffer);
+        stringstream ss;
+        ss << "Processed return request for equipment ID: " << id;
+        history.push(ss.str());
 
         cout << "Processed return request for equipment ID: "
              << id << endl;
@@ -157,7 +159,6 @@ public:
         }
 
         queue<int> temp = returnQueue;
-
         cout << "\n--- Pending Return Requests ---\n";
 
         while (!temp.empty()) {
@@ -173,7 +174,6 @@ public:
         }
 
         stack<string> temp = history;
-
         cout << "\n--- Recent Activity History ---\n";
 
         while (!temp.empty()) {
@@ -199,7 +199,13 @@ public:
             cout << "9. Display Activity History\n";
             cout << "10. Exit\n";
             cout << "Enter your choice: ";
-            cin >> choice;
+
+            if (!(cin >> choice)) {
+                cout << "Invalid input.\n";
+                cin.clear();
+                cin.ignore(10000, '\n');
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -211,11 +217,6 @@ public:
 
                     cout << "Enter quantity: ";
                     cin >> quantity;
-
-                    if (quantity <= 0) {
-                        cout << "Quantity must be positive.\n";
-                        break;
-                    }
 
                     addEquipment(id, name, quantity);
                     break;
@@ -271,7 +272,7 @@ public:
     ~LabEquipmentTracker() {
         Equipment* temp = head;
 
-        while (temp != NULL) {
+        while (temp != nullptr) {
             Equipment* nextNode = temp->next;
             delete temp;
             temp = nextNode;
