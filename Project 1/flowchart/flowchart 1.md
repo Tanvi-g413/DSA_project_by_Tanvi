@@ -1,5 +1,5 @@
 # Flowchart – Lab Equipment Return Tracker Using Doubly Linked List, Stack, and Queue
-
+'''mermaid
 flowchart TD
     A([START]) --> B[Initialize Head = NULL and Tail = NULL, Stack and Queue]
     B --> C[/Display Menu/]
@@ -69,3 +69,4 @@ flowchart TD
 
     E -->|Invalid Choice| AP[/Display Invalid Choice/]
     AP --> C
+    '''
