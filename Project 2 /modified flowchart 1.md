@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
 
     A([START]) --> B[Create expression tree for A+B times C]
@@ -28,3 +29,4 @@ flowchart TD
     T --> U[Display all traversal results]
     U --> V[Delete tree and free memory]
     V --> W([STOP])
+```
