@@ -1,3 +1,5 @@
+
+```mermaid
 flowchart TD
     A([START]) --> B[Create expression tree for A+B times C]
     B --> C[Call postorder root]
@@ -10,3 +12,6 @@ flowchart TD
     E -. Recursive calls complete .-> I[Display A B + C *]
     I --> J[Delete tree and free memory]
     J --> K([STOP])
+```
+
+
