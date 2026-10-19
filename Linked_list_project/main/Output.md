@@ -23,18 +23,18 @@ Equipment record added successfully.
 
 Enter your choice: 2
 
---- Equipment Records ---
+=== Equipment Records ===
 Equipment ID : 101
 Student ID   : 205
 Issue Time   : 10AM
 Status       : Issued
--------------------------
+
 
 Equipment ID : 102
 Student ID   : 218
 Issue Time   : 11AM
 Status       : Issued
--------------------------
+
 
 Enter your choice: 4
 
